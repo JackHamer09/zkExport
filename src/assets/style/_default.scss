@@ -1,0 +1,27 @@
+#app {
+    width: 100%;
+    height: max-content;
+    min-height: 100vh;
+    //min-height: -webkit-fill-available;
+}
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+    //min-height: -webkit-fill-available;
+    padding: 0;
+    margin: 0;
+    outline: none !important;
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+    font-family: $defaultFontFamily;
+    font-weight: 300;
+    text-align: left;
+    overflow: auto;
+}
+head {
+    display: none;
+}
+b {
+    @apply font-bold;
+}

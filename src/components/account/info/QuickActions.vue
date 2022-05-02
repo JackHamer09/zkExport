@@ -1,0 +1,53 @@
+<template>
+  <CardQuickActions>
+    <template #default>
+      <dl>
+        <template v-for="item in requiredFields" :key="item.prop">
+          <Field :field="item" v-model="(values as any)[item.prop]" />
+        </template>
+      </dl>
+      <div class="quick-actions-divider"></div>
+      <div class="quick-action-group">
+        <div class="quick-actions-group-headline">Status</div>
+        <div class="quick-actions-grid">
+          <button class="quick-action-button" @click="getCommittedState">
+            <div class="action-name">Committed state</div>
+            <p class="action-description">Get account committed state <span class="font-medium">(recommended)</span></p>
+          </button>
+          <button class="quick-action-button" @click="getVerifiedState">
+            <div class="action-name">Verified state</div>
+            <p class="action-description">Get account verified state</p>
+          </button>
+        </div>
+      </div>
+    </template>
+  </CardQuickActions>
+</template>
+
+<script lang="ts" setup>
+import { storeToRefs } from "pinia";
+import CardQuickActions from "@/components/common/CardQuickActions.vue";
+import Field from "@/components/common/Field.vue";
+import useAccountInfo, { stateToExportOptions } from "@/store/accountInfo";
+
+const accountInfo = useAccountInfo();
+const { requiredFields, values, searchValues } = storeToRefs(accountInfo);
+
+function getBalances(type: "committed" | "finalized") {
+  accountInfo.resetSearchValues();
+  searchValues.value = {
+    ...searchValues.value,
+    address: values.value.address,
+    stateToExport: stateToExportOptions.find((e) => e.key === type)!,
+  };
+  accountInfo.search();
+}
+
+function getCommittedState() {
+  getBalances("committed");
+}
+
+function getVerifiedState() {
+  getBalances("finalized");
+}
+</script>
