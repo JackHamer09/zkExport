@@ -2,11 +2,19 @@
   <div class="quick-action-group">
     <div class="quick-actions-group-headline">Month</div>
     <div class="quick-actions-grid">
-      <button class="quick-action-button" @click="getThisMonth">
+      <button
+        class="quick-action-button"
+        @click="getThisMonth"
+        @click.passive="logEvent('Fetch account transactions for the current month clicked', values)"
+      >
         <div class="action-name">This month</div>
         <p class="action-description">Get all transactions for {{ formatDate(thisMonth) }}</p>
       </button>
-      <button class="quick-action-button" @click="getPreviousMonth">
+      <button
+        class="quick-action-button"
+        @click="getPreviousMonth"
+        @click.passive="logEvent('Fetch account transactions for the previous month clicked', values)"
+      >
         <div class="action-name">Previous month</div>
         <p class="action-description">Get all transactions for {{ formatDate(previousMonth) }}</p>
       </button>
@@ -19,7 +27,18 @@
           <Select class="col-span-3" v-model="chosenMonth" :options="monthOptions" />
           <Select class="col-span-2" v-model="chosenYear" :options="yearOptions" />
         </div>
-        <Button @click="getCustom" size="md" class="w-full">
+        <Button
+          size="md"
+          class="w-full"
+          @click="getCustom"
+          @click.passive="
+            logEvent('Fetch account transactions for the custom month clicked', {
+              chosenMonth: chosenMonth.key,
+              chosenYear: chosenYear.key,
+              ...values,
+            })
+          "
+        >
           <SearchIcon class="-ml-1 mr-2 h-4 w-4" />
           Fetch
         </Button>
@@ -35,8 +54,9 @@ import { format, startOfToday, startOfMonth, endOfMonth, subMonths, setMonth, se
 import { SearchIcon } from "@heroicons/vue/outline";
 import Button from "@/components/common/Button.vue";
 import Select, { type SelectOption } from "@/components/common/Select.vue";
-import useAccountTransactions, { startFromOptions, finishAtOptionsDefault } from "@/store/accountTransactions";
+import { logEvent } from "@/utils/logger";
 import { getMonthsOptions, getYearOptions } from "@/utils/helpers";
+import useAccountTransactions, { startFromOptions, finishAtOptionsDefault } from "@/store/accountTransactions";
 
 const accountTransactions = useAccountTransactions();
 const { values, searchValues } = storeToRefs(accountTransactions);

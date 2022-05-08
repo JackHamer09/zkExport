@@ -27,6 +27,7 @@
           :disabled="isRequestPending"
           :loading="isRequestPending"
           @click="blockInfo.searchWithSelectedSettings"
+          @click.passive="logEvent('Fetch block info clicked', values)"
         >
           <SearchIcon class="-ml-1 mr-2 h-5 w-5" />
           Fetch block info
@@ -76,6 +77,7 @@ import NetworkAlert from "@/components/common/NetworkAlert.vue";
 import Card from "@/components/common/Card.vue";
 import CardAdvancedSettings from "@/components/common/CardAdvancedSettings.vue";
 import DownloadAsSelect from "@/components/DownloadAsSelect.vue";
+import { logEvent } from "@/utils/logger";
 import usePreferences from "@/store/preferences";
 import useBlockInfo from "@/store/blockInfo";
 

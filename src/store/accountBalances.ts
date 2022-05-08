@@ -6,6 +6,7 @@ import type { SelectOption } from "@/components/common/Select.vue";
 import type { MultiSelectOption } from "@/components/common/MultiSelect.vue";
 import type { FormField } from "@/components/common/Field.vue";
 import { balancesFieldKeys, fieldsNames, type BalancesFieldNameKeys } from "@/utils/fields";
+import { logError } from "@/utils/logger";
 import { getBalancesTableData } from "@/utils/tableData";
 import { downloadData } from "@/utils/download";
 import { requestAccountState } from "@/utils/requests";
@@ -95,7 +96,7 @@ export default defineStore("accountBalances", () => {
       if (!isAddress(searchValues.value.address)) {
         throw new Error("Valid address wasn't provided");
       }
-      searchValues.value.address = searchValues.value.address.trim();
+      searchValues.value.address = searchValues.value.address!.trim();
       if (searchValues.value.fields.length === 0) {
         throw new Error("There should be at least one column to save");
       }
@@ -110,7 +111,7 @@ export default defineStore("accountBalances", () => {
         accountState[searchValues.value.balancesToExport.key as "committed" | "finalized"]?.balances ?? {};
       isRequestSuccessful.value = true;
     } catch (error: unknown) {
-      console.warn("Account balances search error", error);
+      logError("Account balances search error: " + error);
       requestFail.value = (error as any)?.toString() || true;
     } finally {
       isRequestPending.value = false;

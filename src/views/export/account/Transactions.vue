@@ -27,6 +27,7 @@
           :disabled="isRequestPending"
           :loading="isRequestPending"
           @click="accountTransactions.searchWithSelectedSettings"
+          @click.passive="logEvent('Fetch account transactions clicked', values)"
         >
           <SearchIcon class="-ml-1 mr-2 h-5 w-5" />
           Fetch transactions
@@ -60,7 +61,15 @@
         </template>
       </template>
       <template #buttons>
-        <Button @click="stop" :disabled="askToStop" outline size="md" color="yellow" class="w-full">
+        <Button
+          @click="stop"
+          :disabled="askToStop"
+          outline
+          size="md"
+          color="yellow"
+          class="w-full"
+          @click.passive="logEvent('Stop fetch account transactions clicked', searchValues)"
+        >
           <StopIcon class="mr-1.5 h-5 w-5" />
           Stop
         </Button>
@@ -136,6 +145,7 @@ import Card from "@/components/common/Card.vue";
 import CardAdvancedSettings from "@/components/common/CardAdvancedSettings.vue";
 import DownloadAsSelect from "@/components/DownloadAsSelect.vue";
 import QuickActions from "@/components/account/transactions/QuickActions.vue";
+import { logEvent } from "@/utils/logger";
 import useTokens from "@/store/tokens";
 import usePreferences from "@/store/preferences";
 import useAccountTransactions from "@/store/accountTransactions";

@@ -6,10 +6,16 @@
 </template>
 
 <script lang="ts" setup>
+import { watch } from "vue";
 import { storeToRefs } from "pinia";
+import { logEvent } from "@/utils/logger";
 import Select from "@/components/common/Select.vue";
 import usePreferences from "@/store/preferences";
 
 const preferences = usePreferences();
 const { fileFormat } = storeToRefs(preferences);
+
+watch(fileFormat, (format) => {
+  logEvent("Change file format", format.key);
+});
 </script>

@@ -2,11 +2,19 @@
   <div class="quick-action-group">
     <div class="quick-actions-group-headline">Day</div>
     <div class="quick-actions-grid">
-      <button class="quick-action-button" @click="getToday">
+      <button
+        class="quick-action-button"
+        @click="getToday"
+        @click.passive="logEvent('Fetch account transactions for the current day clicked', values)"
+      >
         <div class="action-name">Today</div>
         <p class="action-description">Get all transactions for {{ formatDate(today) }}</p>
       </button>
-      <button class="quick-action-button" @click="getYesterday">
+      <button
+        class="quick-action-button"
+        @click="getYesterday"
+        @click.passive="logEvent('Fetch account transactions for the previous day clicked', values)"
+      >
         <div class="action-name">Yesterday</div>
         <p class="action-description">Get all transactions for {{ formatDate(yesterday) }}</p>
       </button>
@@ -22,7 +30,13 @@
             </template>
           </DatePicker>
         </div>
-        <Button @click="getCustom" :disabled="!chosenDate" size="md" class="w-full">
+        <Button
+          :disabled="!chosenDate"
+          size="md"
+          class="w-full"
+          @click="getCustom"
+          @click.passive="logEvent('Fetch account transactions for the custom day clicked', { chosenDate, ...values })"
+        >
           <SearchIcon class="-ml-1 mr-2 h-4 w-4" />
           Fetch
         </Button>
@@ -39,6 +53,7 @@ import { SearchIcon } from "@heroicons/vue/outline";
 import { DatePicker } from "v-calendar";
 import Input from "@/components/common/Input.vue";
 import Button from "@/components/common/Button.vue";
+import { logEvent } from "@/utils/logger";
 import { minYearDate } from "@/utils/helpers";
 import useAccountTransactions, { startFromOptions, finishAtOptionsDefault } from "@/store/accountTransactions";
 

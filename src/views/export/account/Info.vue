@@ -27,6 +27,7 @@
           :disabled="isRequestPending"
           :loading="isRequestPending"
           @click="accountInfo.searchWithSelectedSettings"
+          @click.passive="logEvent('Fetch account info clicked', values)"
         >
           <SearchIcon class="-ml-1 mr-2 h-5 w-5" />
           Fetch account info
@@ -84,6 +85,7 @@ import Card from "@/components/common/Card.vue";
 import CardAdvancedSettings from "@/components/common/CardAdvancedSettings.vue";
 import DownloadAsSelect from "@/components/DownloadAsSelect.vue";
 import QuickActions from "@/components/account/info/QuickActions.vue";
+import { logEvent } from "@/utils/logger";
 import usePreferences from "@/store/preferences";
 import useAccountInfo from "@/store/accountInfo";
 

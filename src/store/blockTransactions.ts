@@ -7,6 +7,7 @@ import type { Request } from "@/types";
 import type { SelectOption } from "@/components/common/Select.vue";
 import type { MultiSelectOption } from "@/components/common/MultiSelect.vue";
 import type { FormField } from "@/components/common/Field.vue";
+import { logError } from "@/utils/logger";
 import { fieldsNames, transactionFieldKeys, type TransactionFieldNameKeys } from "@/utils/fields";
 import { getTransactionsTableData } from "@/utils/tableData";
 import { wait } from "@/utils/helpers";
@@ -262,7 +263,7 @@ export default defineStore("blockTransactions", () => {
       if (isNaN(parseInt(searchValues.value.blockID!))) {
         throw new Error("Valid block ID wasn't provided");
       }
-      searchValues.value.blockID = searchValues.value.blockID.trim();
+      searchValues.value.blockID = searchValues.value.blockID!.trim();
       if (searchValues.value.startFrom.key === "transaction") {
         if (!searchValues.value.startHash) {
           throw new Error("Valid hash to start search from wasn't provided");
@@ -278,7 +279,7 @@ export default defineStore("blockTransactions", () => {
         if (!isTransactionHash(searchValues.value.finishHash)) {
           throw new Error("Valid hash to finish at wasn't provided");
         }
-        searchValues.value.finishHash = searchValues.value.finishHash.trim();
+        searchValues.value.finishHash = searchValues.value.finishHash!.trim();
       } else if (searchValues.value.finishAt.key === "limit") {
         if (!searchValues.value.max) {
           throw new Error("Valid max transactions amount wasn't provided");
@@ -381,7 +382,7 @@ export default defineStore("blockTransactions", () => {
       await fetchMore();
       isRequestSuccessful.value = true;
     } catch (error: unknown) {
-      console.warn("Block transaction search error", error);
+      logError("Block transaction search error: " + error);
       requestFail.value = (error as any)?.toString() || true;
     } finally {
       isRequestPending.value = false;

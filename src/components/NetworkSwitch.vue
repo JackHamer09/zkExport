@@ -7,7 +7,7 @@
         <div class="mr-1 -ml-1 h-6 w-6 overflow-hidden">
           <img src="@/assets/imgs/eth.svg" alt="Ethereum network" class="h-full w-max object-cover" />
         </div>
-        <span>{{ network.selectedNetwork.label }}</span>
+        <span>{{ selectedNetwork.label }}</span>
         <ChevronDownIcon class="-mr-1 ml-2 h-4 w-4" aria-hidden="true" />
       </MenuButton>
     </div>
@@ -27,23 +27,23 @@
           <MenuItem
             v-for="item in network.zkNetworkOptions"
             :key="item.name"
-            :class="{ selected: item.name === network.selectedNetwork.name }"
+            :class="{ selected: item.name === selectedNetwork.name }"
             class="network-item"
             v-slot="{ active }"
             @click="network.setNetwork(item.name)"
           >
             <div
               :class="[
-                active && item.name !== network.selectedNetwork.name
+                active && item.name !== selectedNetwork.name
                   ? 'bg-gray-100 text-gray-900'
-                  : item.name === network.selectedNetwork.name
+                  : item.name === selectedNetwork.name
                   ? 'font-medium text-white'
                   : 'text-gray-700',
                 'block px-4 py-2 text-sm',
               ]"
             >
               {{ item.label }}
-              <CheckIcon v-if="item.name === network.selectedNetwork.name" class="check-icon" aria-hidden="true" />
+              <CheckIcon v-if="item.name === selectedNetwork.name" class="check-icon" aria-hidden="true" />
             </div>
           </MenuItem>
         </div>
@@ -53,11 +53,19 @@
 </template>
 
 <script lang="ts" setup>
+import { watch } from "vue";
+import { storeToRefs } from "pinia";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { ChevronDownIcon, CheckIcon, SelectorIcon } from "@heroicons/vue/outline";
+import { ChevronDownIcon, CheckIcon } from "@heroicons/vue/outline";
+import { logEvent } from "@/utils/logger";
 import useNetwork from "@/store/network";
 
 const network = useNetwork();
+const { selectedNetwork } = storeToRefs(network);
+
+watch(selectedNetwork, (network) => {
+  logEvent("Network change", network.label);
+});
 </script>
 
 <style lang="scss" scoped>

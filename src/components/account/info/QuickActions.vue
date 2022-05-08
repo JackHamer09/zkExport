@@ -10,11 +10,19 @@
       <div class="quick-action-group">
         <div class="quick-actions-group-headline">Status</div>
         <div class="quick-actions-grid">
-          <button class="quick-action-button" @click="getCommittedState">
+          <button
+            class="quick-action-button"
+            @click="getCommittedState"
+            @click.passive="logEvent('Fetch account committed info clicked', values)"
+          >
             <div class="action-name">Committed state</div>
             <p class="action-description">Get account committed state <span class="font-medium">(recommended)</span></p>
           </button>
-          <button class="quick-action-button" @click="getVerifiedState">
+          <button
+            class="quick-action-button"
+            @click="getVerifiedState"
+            @click.passive="logEvent('Fetch account verified info clicked', values)"
+          >
             <div class="action-name">Verified state</div>
             <p class="action-description">Get account verified state</p>
           </button>
@@ -28,6 +36,7 @@
 import { storeToRefs } from "pinia";
 import CardQuickActions from "@/components/common/CardQuickActions.vue";
 import Field from "@/components/common/Field.vue";
+import { logEvent } from "@/utils/logger";
 import useAccountInfo, { stateToExportOptions } from "@/store/accountInfo";
 
 const accountInfo = useAccountInfo();

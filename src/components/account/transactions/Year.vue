@@ -2,11 +2,19 @@
   <div class="quick-action-group">
     <div class="quick-actions-group-headline">Year</div>
     <div class="quick-actions-grid">
-      <button class="quick-action-button" @click="getThisYear">
+      <button
+        class="quick-action-button"
+        @click="getThisYear"
+        @click.passive="logEvent('Fetch account transactions for the current year clicked', values)"
+      >
         <div class="action-name">This year</div>
         <p class="action-description">Get all transactions for {{ formatDate(thisYear) }}</p>
       </button>
-      <button class="quick-action-button" @click="getPreviousYear">
+      <button
+        class="quick-action-button"
+        @click="getPreviousYear"
+        @click.passive="logEvent('Fetch account transactions for the previous year clicked', values)"
+      >
         <div class="action-name">Previous year</div>
         <p class="action-description">Get all transactions for {{ formatDate(previousYear) }}</p>
       </button>
@@ -18,7 +26,17 @@
         <div class="middle-col place-self-end sm:max-w-[11rem]">
           <Select v-model="chosenYear" :options="yearOptions" />
         </div>
-        <Button @click="getCustom" size="md" class="w-full">
+        <Button
+          size="md"
+          class="w-full"
+          @click="getCustom"
+          @click.passive="
+            logEvent('Fetch account transactions for the custom year clicked', {
+              chosenYear: chosenYear.key,
+              ...values,
+            })
+          "
+        >
           <SearchIcon class="-ml-1 mr-2 h-4 w-4" />
           Fetch
         </Button>
@@ -34,8 +52,9 @@ import { format, startOfToday, startOfYear, endOfYear, subYears, setYear } from 
 import { SearchIcon } from "@heroicons/vue/outline";
 import Button from "@/components/common/Button.vue";
 import Select, { type SelectOption } from "@/components/common/Select.vue";
-import useAccountTransactions, { startFromOptions, finishAtOptionsDefault } from "@/store/accountTransactions";
+import { logEvent } from "@/utils/logger";
 import { getYearOptions } from "@/utils/helpers";
+import useAccountTransactions, { startFromOptions, finishAtOptionsDefault } from "@/store/accountTransactions";
 
 const accountTransactions = useAccountTransactions();
 const { values, searchValues } = storeToRefs(accountTransactions);

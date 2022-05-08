@@ -5,6 +5,7 @@ import type { ApiAccountInfo } from "zksync/build/types";
 import type { SelectOption } from "@/components/common/Select.vue";
 import type { MultiSelectOption } from "@/components/common/MultiSelect.vue";
 import type { FormField } from "@/components/common/Field.vue";
+import { logError } from "@/utils/logger";
 import { accountInfoKeys, fieldsNames, type AccountInfoNameKeys } from "@/utils/fields";
 import { getAccountInfoTableData } from "@/utils/tableData";
 import { downloadData } from "@/utils/download";
@@ -91,7 +92,7 @@ export default defineStore("accountInfo", () => {
       if (!isAddress(searchValues.value.address)) {
         throw new Error("Valid address wasn't provided");
       }
-      searchValues.value.address = searchValues.value.address.trim();
+      searchValues.value.address = searchValues.value.address!.trim();
       if (searchValues.value.fields.length === 0) {
         throw new Error("There should be at least one column to save");
       }
@@ -99,7 +100,7 @@ export default defineStore("accountInfo", () => {
       account.value = accountState[searchValues.value.stateToExport.key as "committed" | "finalized"];
       isRequestSuccessful.value = true;
     } catch (error: unknown) {
-      console.warn("Account account search error", error);
+      logError("Account account search error: " + error);
       requestFail.value = (error as any)?.toString() || true;
     } finally {
       isRequestPending.value = false;

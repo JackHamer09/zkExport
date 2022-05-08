@@ -22,7 +22,19 @@
             </div>
           </template>
         </DatePicker>
-        <Button @click="getInterval" :disabled="!chosenDate.start || !chosenDate.end" size="md" class="w-full">
+        <Button
+          @click="getInterval"
+          @click.passive="
+            logEvent('Fetch account transactions for the custom interval clicked', {
+              chosenDateStart: chosenDate.start,
+              chosenDateEnd: chosenDate.end,
+              ...values,
+            })
+          "
+          :disabled="!chosenDate.start || !chosenDate.end"
+          size="md"
+          class="w-full"
+        >
           <SearchIcon class="-ml-1 mr-2 h-4 w-4" />
           Fetch
         </Button>
@@ -39,6 +51,7 @@ import { SearchIcon } from "@heroicons/vue/outline";
 import { DatePicker } from "v-calendar";
 import Input from "@/components/common/Input.vue";
 import Button from "@/components/common/Button.vue";
+import { logEvent } from "@/utils/logger";
 import { minYearDate } from "@/utils/helpers";
 import useAccountTransactions, { startFromOptions, finishAtOptionsDefault } from "@/store/accountTransactions";
 

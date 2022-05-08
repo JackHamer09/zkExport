@@ -27,6 +27,7 @@
           :disabled="isRequestPending"
           :loading="isRequestPending"
           @click="accountBalances.searchWithSelectedSettings"
+          @click.passive="logEvent('Fetch account balances clicked', values)"
         >
           <SearchIcon class="-ml-1 mr-2 h-5 w-5" />
           Fetch balances
@@ -113,6 +114,7 @@ import Card from "@/components/common/Card.vue";
 import CardAdvancedSettings from "@/components/common/CardAdvancedSettings.vue";
 import DownloadAsSelect from "@/components/DownloadAsSelect.vue";
 import QuickActions from "@/components/account/balances/QuickActions.vue";
+import { logEvent } from "@/utils/logger";
 import useTokens from "@/store/tokens";
 import usePreferences from "@/store/preferences";
 import useAccountBalances from "@/store/accountBalances";

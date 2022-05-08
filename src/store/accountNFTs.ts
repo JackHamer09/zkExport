@@ -5,6 +5,7 @@ import type { ApiAccountInfo } from "zksync/build/types";
 import type { SelectOption } from "@/components/common/Select.vue";
 import type { MultiSelectOption } from "@/components/common/MultiSelect.vue";
 import type { FormField } from "@/components/common/Field.vue";
+import { logError } from "@/utils/logger";
 import { nftsFieldKeys, fieldsNames, type NFTsFieldNameKeys } from "@/utils/fields";
 import { getNFTsTableData } from "@/utils/tableData";
 import { downloadData } from "@/utils/download";
@@ -89,7 +90,7 @@ export default defineStore("accountNFTs", () => {
       if (!isAddress(searchValues.value.address)) {
         throw new Error("Valid address wasn't provided");
       }
-      searchValues.value.address = searchValues.value.address.trim();
+      searchValues.value.address = searchValues.value.address!.trim();
       if (searchValues.value.fields.length === 0) {
         throw new Error("There should be at least one column to save");
       }
@@ -97,7 +98,7 @@ export default defineStore("accountNFTs", () => {
       nfts.value = accountState.committed[searchValues.value.nftsToExport.key as "nfts" | "mintedNfts"] ?? {};
       isRequestSuccessful.value = true;
     } catch (error: unknown) {
-      console.warn("Account nfts search error", error);
+      logError("Account nfts search error: " + error);
       requestFail.value = (error as any)?.toString() || true;
     } finally {
       isRequestPending.value = false;

@@ -2,7 +2,7 @@
   <div class="home-page">
     <div class="logo"><span>zk</span>Export</div>
     <h1 class="title">zkSync mass export tool</h1>
-    <router-link :to="{ name: 'export-account-transactions' }">
+    <router-link :to="{ name: 'export-account-transactions' }" @click.passive="logEvent('Home screen button clicked')">
       <Button size="lg" class="mt-8">
         <span>Try now</span>
         <ArrowRightIcon class="ml-4 -mr-1 h-6 w-6 sm:h-8 sm:w-8" />
@@ -14,6 +14,7 @@
 <script lang="ts" setup>
 import Button from "@/components/common/Button.vue";
 import { ArrowRightIcon } from "@heroicons/vue/solid";
+import { logEvent } from "@/utils/logger";
 </script>
 
 <style lang="scss" scoped>

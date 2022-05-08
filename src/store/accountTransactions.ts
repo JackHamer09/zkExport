@@ -7,6 +7,7 @@ import type { Request } from "@/types";
 import type { SelectOption } from "@/components/common/Select.vue";
 import type { MultiSelectOption } from "@/components/common/MultiSelect.vue";
 import type { FormField } from "@/components/common/Field.vue";
+import { logError } from "@/utils/logger";
 import { fieldsNames, transactionFieldKeys, type TransactionFieldNameKeys } from "@/utils/fields";
 import { getTransactionsTableData } from "@/utils/tableData";
 import { wait } from "@/utils/helpers";
@@ -262,12 +263,12 @@ export default defineStore("accountTransactions", () => {
       if (!isAddress(searchValues.value.address)) {
         throw new Error("Valid address wasn't provided");
       }
-      searchValues.value.address = searchValues.value.address.trim();
+      searchValues.value.address = searchValues.value.address!.trim();
       if (searchValues.value.startFrom.key === "transaction") {
         if (!isTransactionHash(searchValues.value.startHash)) {
           throw new Error("Valid hash to start search from wasn't provided");
         }
-        params.from = searchValues.value.startHash.trim();
+        params.from = searchValues.value.startHash!.trim();
       } else if (searchValues.value.startFrom?.key === "datetime") {
         if (!searchValues.value.startDatetime || !(searchValues.value.startDatetime instanceof Date)) {
           throw new Error("Select a valid start date time");
@@ -278,7 +279,7 @@ export default defineStore("accountTransactions", () => {
         if (!isTransactionHash(searchValues.value.finishHash)) {
           throw new Error("Valid hash to finish at wasn't provided");
         }
-        searchValues.value.finishHash = searchValues.value.finishHash.trim();
+        searchValues.value.finishHash = searchValues.value.finishHash!.trim();
       } else if (searchValues.value.finishAt.key === "limit") {
         if (!searchValues.value.max) {
           throw new Error("Valid max transactions amount wasn't provided");
@@ -384,7 +385,7 @@ export default defineStore("accountTransactions", () => {
       await fetchMore();
       isRequestSuccessful.value = true;
     } catch (error: unknown) {
-      console.warn("Account transaction search error", error);
+      logError("Account transaction search error: " + error);
       requestFail.value = (error as any)?.toString() || true;
     } finally {
       isRequestPending.value = false;

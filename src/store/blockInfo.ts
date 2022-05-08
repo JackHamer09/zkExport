@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import type { ApiBlockInfo } from "zksync/build/types";
 import type { MultiSelectOption } from "@/components/common/MultiSelect.vue";
 import type { FormField } from "@/components/common/Field.vue";
+import { logError } from "@/utils/logger";
 import { blockInfoKeys, fieldsNames, type BlockInfoNameKeys } from "@/utils/fields";
 import { getBlockInfoTableData } from "@/utils/tableData";
 import { downloadData } from "@/utils/download";
@@ -88,14 +89,14 @@ export default defineStore("blockInfo", () => {
       if (isNaN(parseInt(searchValues.value.blockID!))) {
         throw new Error("Valid block ID wasn't provided");
       }
-      searchValues.value.blockID = searchValues.value.blockID.trim();
+      searchValues.value.blockID = searchValues.value.blockID!.trim();
       if (searchValues.value.fields.length === 0) {
         throw new Error("There should be at least one column to save");
       }
       block.value = await requestBlock(searchValues.value.blockID!);
       isRequestSuccessful.value = true;
     } catch (error: unknown) {
-      console.warn("Block search error", error);
+      logError("Block search error: " + error);
       requestFail.value = (error as any)?.toString() || true;
     } finally {
       isRequestPending.value = false;

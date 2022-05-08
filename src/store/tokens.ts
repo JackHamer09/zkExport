@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { $fetch } from "ohmyfetch";
 import { ethers, type BigNumberish } from "ethers";
 import { isNFT } from "zksync/build/utils";
+import { logError } from "@/utils/logger";
 import useNetwork from "./network";
 import type { Request } from "@/types";
 
@@ -79,7 +80,7 @@ export default defineStore("tokens", () => {
       try {
         return ethers.utils.formatUnits(amount, token.decimals).replace(/.0$/g, "");
       } catch (error) {
-        console.warn(`Error parsing the token ${tokenIDorSymbol} with value ${amount}`);
+        logError(`Error parsing the token ${tokenIDorSymbol} with value ${amount}: ` + error);
       }
     }
     return "0";
