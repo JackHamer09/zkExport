@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { $fetch } from "ohmyfetch";
 import { ethers, type BigNumberish } from "ethers";
 import { isNFT } from "zksync/build/utils";
@@ -86,6 +86,19 @@ export default defineStore("tokens", () => {
     }
     return "0";
   }
+
+  function reset() {
+    isRequestPending.value = false;
+    requestFail.value = false;
+    tokens.value = [];
+  }
+
+  watch(
+    () => network.selectedNetwork,
+    () => {
+      reset();
+    }
+  );
 
   return {
     isRequestPending,
