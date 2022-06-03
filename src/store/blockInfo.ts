@@ -5,6 +5,7 @@ import type { ApiBlockInfo } from "zksync/build/types";
 import type { MultiSelectOption } from "@/components/common/MultiSelect.vue";
 import type { FormField } from "@/components/common/Field.vue";
 import { logError } from "@/utils/logger";
+import getError from "@/utils/errors";
 import { blockInfoKeys, fieldsNames, type BlockInfoNameKeys } from "@/utils/fields";
 import { getBlockInfoTableData } from "@/utils/tableData";
 import { downloadData } from "@/utils/download";
@@ -87,17 +88,18 @@ export default defineStore("blockInfo", () => {
       requestFail.value = false;
       block.value = null;
       if (isNaN(parseInt(searchValues.value.blockID!))) {
-        throw new Error("Valid block ID wasn't provided");
+        throw new Error(getError("INVALID_BLOCK_ID_INPUTTED"));
       }
       searchValues.value.blockID = searchValues.value.blockID!.trim();
       if (searchValues.value.fields.length === 0) {
-        throw new Error("There should be at least one column to save");
+        throw new Error(getError("ZERO_FIELDS_INPUTTED"));
       }
       block.value = await requestBlock(searchValues.value.blockID!);
       isRequestSuccessful.value = true;
-    } catch (error: unknown) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       logError("Block search error: " + error);
-      requestFail.value = (error as any)?.toString() || true;
+      requestFail.value = (error && error.message ? error.message : error) || true;
     } finally {
       isRequestPending.value = false;
     }

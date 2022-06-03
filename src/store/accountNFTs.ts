@@ -11,6 +11,7 @@ import { getNFTsTableData } from "@/utils/tableData";
 import { downloadData } from "@/utils/download";
 import { requestAccountState } from "@/utils/requests";
 import { isAddress } from "@/utils/validators";
+import getError from "@/utils/errors";
 
 export type Values = {
   address: null | string;
@@ -88,18 +89,19 @@ export default defineStore("accountNFTs", () => {
       requestFail.value = false;
       nfts.value = {};
       if (!isAddress(searchValues.value.address)) {
-        throw new Error("Valid address wasn't provided");
+        throw new Error(getError("INVALID_ADDRESS_INPUTTED"));
       }
       searchValues.value.address = searchValues.value.address!.trim();
       if (searchValues.value.fields.length === 0) {
-        throw new Error("There should be at least one column to save");
+        throw new Error(getError("ZERO_FIELDS_INPUTTED"));
       }
       const accountState = await requestAccountState(searchValues.value.address!);
       nfts.value = accountState.committed[searchValues.value.nftsToExport.key as "nfts" | "mintedNfts"] ?? {};
       isRequestSuccessful.value = true;
-    } catch (error: unknown) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       logError("Account nfts search error: " + error);
-      requestFail.value = (error as any)?.toString() || true;
+      requestFail.value = (error && error.message ? error.message : error) || true;
     } finally {
       isRequestPending.value = false;
     }

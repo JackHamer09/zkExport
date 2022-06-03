@@ -12,6 +12,7 @@ import { fieldsNames, transactionFieldKeys, type TransactionFieldNameKeys } from
 import { getTransactionsTableData } from "@/utils/tableData";
 import { wait } from "@/utils/helpers";
 import { isAddress, isTransactionHash } from "@/utils/validators";
+import getError from "@/utils/errors";
 import { downloadData } from "@/utils/download";
 import useNetwork from "./network";
 import useTokens from "./tokens";
@@ -261,42 +262,42 @@ export default defineStore("accountTransactions", () => {
         limit: "100",
       };
       if (!isAddress(searchValues.value.address)) {
-        throw new Error("Valid address wasn't provided");
+        throw new Error(getError("INVALID_ADDRESS_INPUTTED"));
       }
       searchValues.value.address = searchValues.value.address!.trim();
       if (searchValues.value.startFrom.key === "transaction") {
         if (!isTransactionHash(searchValues.value.startHash)) {
-          throw new Error("Valid hash to start search from wasn't provided");
+          throw new Error(getError("INVALID_TX_START_HASH_INPUTTED"));
         }
         params.from = searchValues.value.startHash!.trim();
       } else if (searchValues.value.startFrom?.key === "datetime") {
         if (!searchValues.value.startDatetime || !(searchValues.value.startDatetime instanceof Date)) {
-          throw new Error("Select a valid start date time");
+          throw new Error(getError("INVALID_START_DATE_TIME_INPUTTED"));
         }
         params.direction = "older";
       }
       if (searchValues.value.finishAt.key === "transaction") {
         if (!isTransactionHash(searchValues.value.finishHash)) {
-          throw new Error("Valid hash to finish at wasn't provided");
+          throw new Error(getError("INVALID_TX_FINISH_HASH_INPUTTED"));
         }
         searchValues.value.finishHash = searchValues.value.finishHash!.trim();
       } else if (searchValues.value.finishAt.key === "limit") {
         if (!searchValues.value.max) {
-          throw new Error("Valid max transactions amount wasn't provided");
+          throw new Error(getError("INVALID_MAX_TX_INPUTTED"));
         }
         searchValues.value.max = searchValues.value.max.trim();
       } else if (searchValues.value.finishAt.key === "datetime") {
         if (!searchValues.value.finishDatetime || !(searchValues.value.finishDatetime instanceof Date)) {
-          throw new Error("Select a valid finish date time");
+          throw new Error(getError("INVALID_FINISH_DATE_TIME_INPUTTED"));
         }
       }
       if (searchValues.value.fields.length === 0) {
-        throw new Error("There should be at least one column to save");
+        throw new Error(getError("ZERO_FIELDS_INPUTTED"));
       }
       await tokens.requestTokens();
       if (tokens.requestFail) {
         throw new Error(
-          typeof tokens.requestFail === "string" ? tokens.requestFail : "We were not able to request tokens information"
+          typeof tokens.requestFail === "string" ? tokens.requestFail : getError("ERROR_REQUESTING_TOKENS_INFORMATION")
         );
       }
       let nextPaginationTxHash: string | undefined;
@@ -384,9 +385,10 @@ export default defineStore("accountTransactions", () => {
       };
       await fetchMore();
       isRequestSuccessful.value = true;
-    } catch (error: unknown) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       logError("Account transaction search error: " + error);
-      requestFail.value = (error as any)?.toString() || true;
+      requestFail.value = (error && error.message ? error.message : error) || true;
     } finally {
       isRequestPending.value = false;
     }

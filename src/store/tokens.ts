@@ -46,9 +46,10 @@ export default defineStore("tokens", () => {
         }
       };
       await fetchMore();
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       tokens.value = [];
-      requestFail.value = (error as any)?.toString() || true;
+      requestFail.value = (error && error.message ? error.message : error) || true;
       throw error;
     } finally {
       isRequestPending.value = false;

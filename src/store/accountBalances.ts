@@ -11,6 +11,7 @@ import { getBalancesTableData } from "@/utils/tableData";
 import { downloadData } from "@/utils/download";
 import { requestAccountState } from "@/utils/requests";
 import { isAddress } from "@/utils/validators";
+import getError from "@/utils/errors";
 import useTokens from "./tokens";
 
 export type Values = {
@@ -94,25 +95,26 @@ export default defineStore("accountBalances", () => {
       requestFail.value = false;
       balances.value = {};
       if (!isAddress(searchValues.value.address)) {
-        throw new Error("Valid address wasn't provided");
+        throw new Error(getError("INVALID_ADDRESS_INPUTTED"));
       }
       searchValues.value.address = searchValues.value.address!.trim();
       if (searchValues.value.fields.length === 0) {
-        throw new Error("There should be at least one column to save");
+        throw new Error(getError("ZERO_FIELDS_INPUTTED"));
       }
       await tokens.requestTokens();
       if (tokens.requestFail) {
         throw new Error(
-          typeof tokens.requestFail === "string" ? tokens.requestFail : "We were not able to request tokens information"
+          typeof tokens.requestFail === "string" ? tokens.requestFail : getError("ERROR_REQUESTING_TOKENS_INFORMATION")
         );
       }
       const accountState = await requestAccountState(searchValues.value.address!);
       balances.value =
         accountState[searchValues.value.balancesToExport.key as "committed" | "finalized"]?.balances ?? {};
       isRequestSuccessful.value = true;
-    } catch (error: unknown) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       logError("Account balances search error: " + error);
-      requestFail.value = (error as any)?.toString() || true;
+      requestFail.value = (error && error.message ? error.message : error) || true;
     } finally {
       isRequestPending.value = false;
     }
