@@ -22,6 +22,7 @@ const defaultRoutes = [
     component: Index,
     meta: {
       title: "Export zkSync transactions to CSV, XLS and more",
+      description: "Export zkSync transactions or account balances to CSV, XLS and other table formats",
     },
   },
 ];
@@ -33,7 +34,7 @@ export const accountRoutes = [
     component: ExportAccountTransactions,
     meta: {
       label: "Account Transactions",
-      description: "Export transaction history of an address",
+      description: "Export transaction history of an account to CSV, XLS and other table formats",
       icon: ChartBarIcon,
       title: "Export zkSync account transactions",
     },
@@ -44,7 +45,7 @@ export const accountRoutes = [
     component: ExportAccountBalances,
     meta: {
       label: "Account Balances",
-      description: "Export balances of an address",
+      description: "Export balances of an account to CSV, XLS and other table formats",
       icon: CurrencyDollarIcon,
       title: "Export zkSync account balances",
     },
@@ -55,7 +56,7 @@ export const accountRoutes = [
     component: ExportAccountNFTs,
     meta: {
       label: "Account NFTs",
-      description: "Export NFTs of an address",
+      description: "Export NFTs of an account to CSV, XLS and other table formats",
       icon: PhotographIcon,
       title: "Export zkSync account NFTs",
     },
@@ -66,7 +67,7 @@ export const accountRoutes = [
     component: ExportAccountInfo,
     meta: {
       label: "Account Info",
-      description: "Export account information",
+      description: "Export account information to CSV, XLS and other table formats",
       icon: UserIcon,
       title: "Export zkSync account information",
     },
@@ -79,7 +80,7 @@ export const blockRoutes = [
     component: ExportBlockTransactions,
     meta: {
       label: "Block Transactions",
-      description: "Export block transactions",
+      description: "Export block transactions to CSV, XLS and other table formats",
       icon: ChartSquareBarIcon,
       title: "Export zkSync block transactions",
     },
@@ -90,7 +91,7 @@ export const blockRoutes = [
     component: ExportBlockInfo,
     meta: {
       label: "Block Info",
-      description: "Export block information",
+      description: "Export block information to CSV, XLS and other table formats",
       icon: CubeIcon,
       title: "Export zkSync block information",
     },
@@ -102,8 +103,20 @@ const router = createRouter({
   routes: [...defaultRoutes, ...accountRoutes, ...blockRoutes],
 });
 
+function replaceMeta(type: "name" | "property", key: string, value: unknown, fallbackValue: string) {
+  document.querySelector(`meta[${type}="${key}"]`)?.setAttribute("content", (value ?? fallbackValue) as string);
+}
+
 router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title} | zkExport`;
+  replaceMeta("name", "description", to.meta.description, defaultRoutes[0].meta.description);
+  replaceMeta("property", "og:url", to.path, to.path);
+  replaceMeta("property", "og:title", to.meta.title, defaultRoutes[0].meta.title);
+  replaceMeta("property", "og:image:alt", to.meta.title, defaultRoutes[0].meta.title);
+  replaceMeta("property", "og:description", to.meta.description, defaultRoutes[0].meta.description);
+  replaceMeta("name", "twitter:image:alt", to.meta.title, defaultRoutes[0].meta.title);
+  replaceMeta("name", "twitter:title", to.meta.title, defaultRoutes[0].meta.title);
+  replaceMeta("name", "twitter:description", to.meta.description, defaultRoutes[0].meta.description);
   next();
 });
 
