@@ -17,7 +17,7 @@ export default defineStore("network", () => {
   const zkNetworkName = useStorage("network", "mainnet") as Ref<ZkNetworkName>;
 
   const selectedNetwork = computed(() => {
-    return zkNetworkOptions.find((e) => e.name === zkNetworkName.value)!;
+    return zkNetworkOptions.find((e) => e.name === zkNetworkName.value) || zkNetworkOptions[0];
   });
 
   const isMainnet = computed(() => {
