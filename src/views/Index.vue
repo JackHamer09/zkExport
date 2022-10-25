@@ -1,7 +1,11 @@
 <template>
   <div class="home-page">
     <div class="logo"><span>zk</span>Export</div>
-    <h1 class="title">zkSync mass export tool</h1>
+    <h1 class="title">
+      <span class="sr-only">zkExport - </span>
+      zkSync mass export tool
+      <span class="sr-only">Export transactions to CSV, XLS</span>
+    </h1>
     <router-link :to="{ name: 'export-account-transactions' }" @click.passive="logEvent('Home screen button clicked')">
       <Button size="lg" class="mt-8">
         <span>Try now</span>

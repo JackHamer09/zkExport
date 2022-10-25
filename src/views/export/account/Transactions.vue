@@ -2,6 +2,7 @@
   <div class="account-transactions-export">
     <!-- Headline -->
     <h1 class="page-headline">Export Account Transactions</h1>
+    <p v-if="meta?.description" class="sr-only">{{ meta.description }}</p>
 
     <!-- Main settings -->
     <Card>
@@ -149,7 +150,9 @@ import { logEvent } from "@/utils/logger";
 import useTokens from "@/store/tokens";
 import usePreferences from "@/store/preferences";
 import useAccountTransactions from "@/store/accountTransactions";
+import { useRoute } from "vue-router";
 
+const { meta } = useRoute();
 const tokens = useTokens();
 const preferences = usePreferences();
 const { isRequestPending: isTokensRequestPending, tokens: tokensCollection } = storeToRefs(tokens);

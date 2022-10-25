@@ -1,5 +1,6 @@
 <template>
   <Popover class="header gradient-bg relative">
+    <DonateModal v-model:value="donateModalOpened" />
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <div class="flex items-center justify-between py-5 md:justify-start md:space-x-10">
         <div class="flex justify-start lg:w-0 lg:flex-1">
@@ -9,7 +10,7 @@
         </div>
         <div class="-my-2 -mr-2 md:hidden">
           <PopoverButton
-            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+            class="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
           >
             <span class="sr-only">Open menu</span>
             <MenuIcon class="h-6 w-6" aria-hidden="true" />
@@ -73,13 +74,11 @@
           </Popover>
         </PopoverGroup>
         <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-          <!-- <a
-            href="#"
-            class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-          >
-            Donate
-          </a> -->
           <NetworkSwitch class="z-10" />
+          <Button class="ml-2" size="sm" @click="donateModalOpened = true">
+            <HeartIcon class="-ml-1 mr-1.5 h-4 w-4" aria-hidden="true" />
+            <span class="leading-[22px]">Buy me a coffee</span>
+          </Button>
         </div>
       </div>
       <div class="h-[2px] w-full bg-gradient-to-r from-indigo-500 via-indigo-500 to-indigo-400"></div>
@@ -138,16 +137,12 @@
               </nav>
             </div>
           </div>
-          <div class="space-y-6 py-6 px-5">
+          <div class="grid-cols-[max-content_1fr] items-center space-y-3 py-6 px-5 sm:grid sm:gap-4 sm:space-y-0">
+            <Button class="w-full" size="sm" @click="donateModalOpened = true">
+              <HeartIcon class="-ml-1 mr-1.5 h-4 w-4" aria-hidden="true" />
+              <span class="leading-[22px]">Buy me a coffee</span>
+            </Button>
             <NetworkSwitch class="z-10" />
-            <!-- <div>
-              <a
-                href="#"
-                class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-              >
-                Donate
-              </a>
-            </div> -->
           </div>
         </div>
       </PopoverPanel>
@@ -156,12 +151,16 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from "@headlessui/vue";
-import { MenuIcon, XIcon } from "@heroicons/vue/outline";
+import { MenuIcon, XIcon, HeartIcon } from "@heroicons/vue/outline";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 import { accountRoutes, blockRoutes } from "@/router";
 import NetworkSwitch from "@/components/NetworkSwitch.vue";
+import DonateModal from "@/components/DonateModal.vue";
+import Button from "@/components/common/Button.vue";
+
+const donateModalOpened = ref(false);
 
 const links = computed(() => [
   {

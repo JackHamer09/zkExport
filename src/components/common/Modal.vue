@@ -53,6 +53,12 @@
               >
                 <ExclamationIcon class="h-6 w-6 text-red-600" aria-hidden="true" />
               </div>
+              <div
+                v-else-if="type === 'heart'"
+                class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-pink-100"
+              >
+                <HeartIcon class="h-6 w-6 text-pink-600" aria-hidden="true" />
+              </div>
 
               <div class="mt-3 text-center sm:mt-5">
                 <DialogTitle as="h3" class="text-lg font-medium leading-6 text-neutral-900">
@@ -76,7 +82,7 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from "@headlessui/vue";
-import { CheckIcon, ExclamationIcon, StopIcon } from "@heroicons/vue/outline";
+import { CheckIcon, ExclamationIcon, StopIcon, HeartIcon } from "@heroicons/vue/outline";
 import Spinner from "./Spinner.vue";
 
 const props = defineProps({

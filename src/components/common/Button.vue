@@ -1,12 +1,12 @@
 <template>
-  <button v-bind="$attrs" :class="[`size-${size}`, `color-${color}`, `outline-${outline}`]" class="button">
+  <component :is="tag" v-bind="$attrs" :class="[`size-${size}`, `color-${color}`, `outline-${outline}`]" class="button">
     <transition name="fade">
       <Spinner class="spinner" size="xs" v-if="loading" />
     </transition>
     <div class="button-slot">
       <slot />
     </div>
-  </button>
+  </component>
 </template>
 
 <script lang="ts" setup>
@@ -14,13 +14,17 @@ import type { PropType } from "vue";
 import Spinner from "./Spinner.vue";
 
 defineProps({
+  tag: {
+    type: String as PropType<"button" | "a">,
+    default: "button",
+  },
   size: {
     type: String as PropType<"xs" | "sm" | "md" | "lg">,
     default: "sm",
     required: false,
   },
   color: {
-    type: String as PropType<"indigo" | "green" | "red" | "yellow" | "gray">,
+    type: String as PropType<"indigo" | "green" | "red" | "yellow" | "gray" | "zksync">,
     default: "indigo",
     required: false,
   },
@@ -60,6 +64,9 @@ defineProps({
           }
           &-gray {
             @apply bg-gray-400;
+          }
+          &-zksync {
+            @apply bg-[#4e529a];
           }
         }
       }
@@ -103,6 +110,9 @@ defineProps({
           }
           &-gray {
             @apply bg-gray-500 hover:bg-gray-600;
+          }
+          &-zksync {
+            @apply bg-[#4e529a] hover:bg-[#4a4e92];
           }
         }
       }
