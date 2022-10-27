@@ -4,8 +4,8 @@
       <div>
         ENS name
         <div class="flex items-center justify-center">
-          <b>JackHamer.eth</b>
-          <CopyButton class="ml-2" tooltip-position="left" :value="address" />
+          <b>{{ ensName }}</b>
+          <CopyButton class="ml-2" tooltip-position="left" :value="ensName" />
         </div>
       </div>
       <div class="mt-2">
@@ -68,6 +68,7 @@ const opened = computed({
   },
 });
 
+const ensName = "JackHamer.eth";
 const address = "0x11Ed0AC7D6142481E459B6e5d4bfB5646277796f";
 const binanceAddress = "0xd3f1474abb8ba03cbe83120f4796cb3793bcb2f8";
 </script>
