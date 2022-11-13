@@ -5,21 +5,31 @@
         ENS name
         <div class="flex items-center justify-center">
           <b>{{ ensName }}</b>
-          <CopyButton class="ml-2" tooltip-position="left" :value="ensName" />
+          <CopyButton class="ml-2" tooltip-position="left" :value="ensName" @copied="logEvent('Copy ENS Name')" />
         </div>
       </div>
       <div class="mt-2">
         zkSync address / Ethereum address
         <div class="flex items-center justify-center">
           <b><HashLabel :text="address" /></b>
-          <CopyButton class="ml-2" tooltip-position="left" :value="address" />
+          <CopyButton
+            class="ml-2"
+            tooltip-position="left"
+            :value="address"
+            @copied="logEvent('Copy Ethereum Address')"
+          />
         </div>
       </div>
       <div class="mt-2">
         Binance BSC / Binance Ethereum address
         <div class="flex items-center justify-center">
           <b><HashLabel :text="binanceAddress" /></b>
-          <CopyButton class="ml-2" tooltip-position="left" :value="binanceAddress" />
+          <CopyButton
+            class="ml-2"
+            tooltip-position="left"
+            :value="binanceAddress"
+            @copied="logEvent('Copy Binance Address')"
+          />
         </div>
       </div>
     </template>
@@ -31,6 +41,7 @@
         target="_blank"
         :href="`https://wallet.zksync.io/transaction/transfer?address=${address}`"
         class="w-full"
+        @click="logEvent('Transfer on zkSync')"
       >
         <span>Transfer on zkSync</span>
         <ExternalLinkIcon class="ml-1.5 h-5 w-5" />
@@ -44,6 +55,7 @@
 import { computed } from "vue";
 import { ExternalLinkIcon } from "@heroicons/vue/outline";
 
+import { logEvent } from "@/utils/logger";
 import Button from "@/components/common/Button.vue";
 import Modal from "@/components/common/Modal.vue";
 import HashLabel from "@/components/common/HashLabel.vue";

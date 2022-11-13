@@ -64,7 +64,7 @@ const network = useNetwork();
 const { selectedNetwork } = storeToRefs(network);
 
 watch(selectedNetwork, (network) => {
-  logEvent("Network change", network.label);
+  logEvent("Network change", { network: network.label });
 });
 </script>
 

@@ -20,6 +20,7 @@
     "pinia": "^2.0.12",
     "v-calendar": "^3.0.0-alpha.8",
     "vue": "^3.2.25",
+    "vue-gtag-next": "^1.14.0",
     "vue-router": "^4.0.14",
     "xlsx": "^0.18.5",
     "zksync": "^0.12.1"

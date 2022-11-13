@@ -28,6 +28,11 @@ const props = defineProps({
     default: "top",
   },
 });
+
+const emit = defineEmits<{
+  (event: "copied"): void;
+}>();
+
 const isCopied = ref(false);
 
 function resetIsShowing() {
@@ -49,6 +54,7 @@ function copyToClipboard(value: string) {
   elem.focus();
   document.execCommand("copy");
   document.body.removeChild(elem);
+  emit("copied");
 }
 
 function copyValue() {

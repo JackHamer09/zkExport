@@ -4,7 +4,7 @@ import usePreferences from "@/store/preferences";
 
 export function downloadData(data: Record<string, unknown>[], name: string) {
   const preferences = usePreferences();
-  logEvent("Request download", preferences.fileFormat.key);
+  logEvent("Request download", { format: preferences.fileFormat.key });
   if (preferences.fileFormat.key === "json") {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: "text/plain;charset=utf-8" });
     const url = window.URL || window.webkitURL;

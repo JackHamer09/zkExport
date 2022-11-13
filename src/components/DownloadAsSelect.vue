@@ -16,6 +16,6 @@ const preferences = usePreferences();
 const { fileFormat } = storeToRefs(preferences);
 
 watch(fileFormat, (format) => {
-  logEvent("Change file format", format.key);
+  logEvent("Change file format", { format: format.key });
 });
 </script>

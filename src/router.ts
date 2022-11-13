@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { trackRouter } from "vue-gtag-next";
 import {
   ChartBarIcon,
   UserIcon,
@@ -119,5 +120,7 @@ router.beforeEach((to, from, next) => {
   replaceMeta("name", "twitter:description", to.meta.description, defaultRoutes[0].meta.description);
   next();
 });
+
+trackRouter(router);
 
 export default router;

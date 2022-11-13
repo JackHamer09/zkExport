@@ -2,10 +2,17 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import "v-calendar/dist/style.css";
 import App from "./App.vue";
+import VueGtag from "vue-gtag-next";
 import router from "./router";
-import { startLogRocket } from "./utils/logger";
 import "./assets/style/main.scss";
 
-createApp(App).use(createPinia()).use(router).mount("#app");
-
-startLogRocket(import.meta.env.VITE_LOG_ROCKET_APP_ID as string | undefined);
+createApp(App)
+  .use(VueGtag, {
+    useDebugger: process.env.NODE_ENV === "development",
+    property: {
+      id: import.meta.env.VITE_GOOGLE_MEASUREMENT_ID,
+    },
+  })
+  .use(createPinia())
+  .use(router)
+  .mount("#app");

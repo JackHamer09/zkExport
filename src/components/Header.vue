@@ -151,16 +151,21 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from "@headlessui/vue";
 import { MenuIcon, XIcon, HeartIcon } from "@heroicons/vue/outline";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 import { accountRoutes, blockRoutes } from "@/router";
+import { logEvent } from "@/utils/logger";
 import NetworkSwitch from "@/components/NetworkSwitch.vue";
 import DonateModal from "@/components/DonateModal.vue";
 import Button from "@/components/common/Button.vue";
 
 const donateModalOpened = ref(false);
+
+watch(donateModalOpened, (opened) => {
+  logEvent("Donate modal", { opened });
+});
 
 const links = computed(() => [
   {
