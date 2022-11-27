@@ -15,7 +15,6 @@
     "@vueuse/core": "^8.3.1",
     "date-fns": "^2.28.0",
     "joi-browser": "^13.4.0",
-    "logrocket": "^3.0.0",
     "ohmyfetch": "^0.4.15",
     "pinia": "^2.0.12",
     "v-calendar": "^3.0.0-alpha.8",

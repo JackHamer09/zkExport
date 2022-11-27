@@ -1,7 +1,11 @@
 <template>
   <Modal v-model:value="opened" type="heart" title="Buy me a coffee ❤️">
     <template #body>
-      <div>
+      <div class="disclaimer">
+        This website is not affiliated with Matter Labs. Do not send any tokens if you expect to receive an airdrop or
+        any other benefit from Matter Labs / zkSync.
+      </div>
+      <div class="mt-2">
         ENS name
         <div class="flex items-center justify-center">
           <b>{{ ensName }}</b>
@@ -84,3 +88,9 @@ const ensName = "JackHamer.eth";
 const address = "0x11Ed0AC7D6142481E459B6e5d4bfB5646277796f";
 const binanceAddress = "0xd3f1474abb8ba03cbe83120f4796cb3793bcb2f8";
 </script>
+
+<style lang="scss" scoped>
+.disclaimer {
+  @apply text-xs font-semibold leading-tight;
+}
+</style>
