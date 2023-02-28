@@ -1,8 +1,8 @@
-# zkExport - zkSync mass exporting tool
+# zkExport - zkSync Lite mass exporting tool
 
 ## Description
 
-zkExport is an open-source tool that will help you mass export transactions from zkSync v1.x L2 network to different popular table formats (CSV, XLS and more) with a great range of options.
+zkExport is an open-source tool that will help you mass export transactions from zkSync Lite L2 network to different popular table formats (CSV, XLS and more) with a great range of options.
 
 ---
 
