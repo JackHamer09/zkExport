@@ -85,8 +85,8 @@ const opened = computed({
 });
 
 const ensName = "JackHamer.eth";
-const address = "0x11Ed0AC7D6142481E459B6e5d4bfB5646277796f";
-const binanceAddress = "0xd3f1474abb8ba03cbe83120f4796cb3793bcb2f8";
+const address = "0xa1cf087DB965Ab02Fb3CFaCe1f5c63935815f044";
+const binanceAddress = "0x761334bbbeb127092521c9d8af1f7c8fedd9f88f";
 </script>
 
 <style lang="scss" scoped>
