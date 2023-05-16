@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, type Ref } from "vue";
+import { computed, nextTick, type Ref } from "vue";
 import { useRouteQuery } from "@vueuse/router";
 import { useStorage } from "@vueuse/core";
 
@@ -17,9 +17,12 @@ export default defineStore("network", () => {
   const zkNetworkName = useStorage("network", "mainnet") as Ref<ZkNetworkName>;
 
   const queryNetwork = useRouteQuery("network");
-  if (queryNetwork.value && zkNetworkOptions.find((e) => e.name === queryNetwork.value)) {
-    zkNetworkName.value = queryNetwork.value as ZkNetworkName;
-  }
+  setTimeout(() => {
+    // Need to wait until query param becomes available
+    if (queryNetwork.value && zkNetworkOptions.find((e) => e.name === queryNetwork.value)) {
+      zkNetworkName.value = queryNetwork.value as ZkNetworkName;
+    }
+  }, 0);
 
   const selectedNetwork = computed(() => {
     return zkNetworkOptions.find((e) => e.name === zkNetworkName.value) || zkNetworkOptions[0];
