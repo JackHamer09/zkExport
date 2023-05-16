@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, nextTick, type Ref } from "vue";
+import { computed, type Ref } from "vue";
 import { useRouteQuery } from "@vueuse/router";
 import { useStorage } from "@vueuse/core";
 
