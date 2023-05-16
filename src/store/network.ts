@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { computed, type Ref } from "vue";
+import { useRouteQuery } from "@vueuse/router";
 import { useStorage } from "@vueuse/core";
 
 type ZkNetworkName = "goerli" | "goerli-beta" | "mainnet";
@@ -14,6 +15,11 @@ export default defineStore("network", () => {
     { name: "goerli-beta", label: "Goerli Beta Testnet" },
   ];
   const zkNetworkName = useStorage("network", "mainnet") as Ref<ZkNetworkName>;
+
+  const queryNetwork = useRouteQuery("network");
+  if (queryNetwork.value && zkNetworkOptions.find((e) => e.name === queryNetwork.value)) {
+    zkNetworkName.value = queryNetwork.value as ZkNetworkName;
+  }
 
   const selectedNetwork = computed(() => {
     return zkNetworkOptions.find((e) => e.name === zkNetworkName.value) || zkNetworkOptions[0];
