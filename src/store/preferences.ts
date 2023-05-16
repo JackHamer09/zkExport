@@ -1,11 +1,13 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, nextTick } from "vue";
 import useAccountInfo from "./accountInfo";
 import useAccountBalances from "./accountBalances";
 import useAccountNFTs from "./accountNFTs";
 import useAccountTransactions from "./accountTransactions";
 import useBlockInfo from "./blockInfo";
 import useBlockTransactions from "./blockTransactions";
+import { useRouteQuery } from "@vueuse/router";
+import { isAddress } from "@/utils/validators";
 
 export default defineStore("preferences", () => {
   const accountInfo = useAccountInfo();
@@ -41,6 +43,14 @@ export default defineStore("preferences", () => {
       blockTransactions.values.blockID = blockID;
     }
   }
+
+  const queryAddress = useRouteQuery("address");
+  nextTick(() => {
+    if (typeof queryAddress.value === "string" && isAddress(queryAddress.value)) {
+      setAddressEverywhere(queryAddress.value);
+    }
+  });
+
   return {
     fileFormat,
     fileFormatOptions,
