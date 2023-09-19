@@ -1,5 +1,20 @@
 <template>
   <div class="home-page">
+    <div class="mb-3 flex justify-center">
+      <div
+        class="relative rounded-xl px-5 py-1 text-sm leading-6 text-white ring-1 ring-white/10 transition-colors hover:ring-white/20 sm:rounded-full sm:px-3"
+      >
+        Need to do your crypto taxes?
+        <a
+          href="https://awaken.tax/?ref=zkexport"
+          target="_blank"
+          class="block font-semibold text-indigo-100 sm:inline"
+        >
+          <span class="absolute inset-0" aria-hidden="true" />Try awaken.tax
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
     <div class="logo"><span>zk</span>Export</div>
     <h1 class="title">
       <span class="sr-only">zkExport - </span>

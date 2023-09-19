@@ -1,5 +1,5 @@
 <template>
-  <Modal v-model:value="opened" type="heart" title="Buy me a coffee ❤️">
+  <Modal v-model:value="opened" :show-ad="false" type="heart" title="Buy me a coffee ❤️">
     <template #body>
       <div class="disclaimer">
         This website is not affiliated with Matter Labs. Do not send any tokens if you expect to receive an airdrop or

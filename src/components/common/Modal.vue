@@ -72,6 +72,31 @@
             <div v-if="$slots.buttons" class="mt-5 sm:mt-6">
               <slot name="buttons" />
             </div>
+            <div v-if="showAd" class="mt-5 w-full border-t border-dashed sm:mt-6">
+              <div class="group relative">
+                <h3 class="mt-4 font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                  <a href="https://awaken.tax/?ref=zkexport" target="_blank">
+                    <span class="absolute inset-0" />
+                    Need to do your crypto taxes?
+                  </a>
+                </h3>
+                <p class="line-clamp-3 mt-1 text-sm text-gray-600">
+                  Try out
+                  <a class="text-indigo-600" href="https://awaken.tax/?ref=zkexport" target="_blank">awaken.tax</a>!
+                  They support dozens of exchanges/blockchains and are fine-tuned for DeFi & NFT
+                </p>
+                <Button
+                  as="a"
+                  href="https://awaken.tax/?ref=zkexport"
+                  target="_blank"
+                  color="indigo"
+                  outline
+                  class="mt-2 w-full sm:-mb-1.5"
+                >
+                  Get free $30 bonus&nbsp;<span aria-hidden="true">&rarr;</span>
+                </Button>
+              </div>
+            </div>
           </div>
         </TransitionChild>
       </div>
@@ -83,6 +108,7 @@
 import { computed } from "vue";
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from "@headlessui/vue";
 import { CheckIcon, ExclamationIcon, StopIcon, HeartIcon } from "@heroicons/vue/outline";
+import Button from "./Button.vue";
 import Spinner from "./Spinner.vue";
 
 const props = defineProps({
@@ -104,6 +130,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
     required: false,
+  },
+  showAd: {
+    type: Boolean,
+    default: true,
   },
 });
 

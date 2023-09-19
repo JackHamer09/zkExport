@@ -41,6 +41,8 @@
     <!-- Quick actions -->
     <QuickActions />
 
+    <Taxes />
+
     <!-- Modals -->
     <Modal
       :value="isRequestPending"
@@ -109,6 +111,7 @@ import Field from "@/components/common/Field.vue";
 import Button from "@/components/common/Button.vue";
 import Modal from "@/components/common/Modal.vue";
 import UseQuickActions from "@/components/common/UseQuickActions.vue";
+import Taxes from "@/components/Taxes.vue";
 import NetworkAlert from "@/components/common/NetworkAlert.vue";
 import Card from "@/components/common/Card.vue";
 import CardAdvancedSettings from "@/components/common/CardAdvancedSettings.vue";
