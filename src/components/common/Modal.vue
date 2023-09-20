@@ -75,15 +75,24 @@
             <div v-if="showAd" class="mt-5 w-full border-t border-dashed sm:mt-6">
               <div class="group relative">
                 <h3 class="mt-4 font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                  <a href="https://awaken.tax/?ref=zkexport" target="_blank">
+                  <a
+                    href="https://awaken.tax/?ref=zkexport"
+                    target="_blank"
+                    @click.passive="logEvent('awaken.tax clicked')"
+                  >
                     <span class="absolute inset-0" />
                     Need to do your crypto taxes?
                   </a>
                 </h3>
                 <p class="line-clamp-3 mt-1 text-sm text-gray-600">
                   Try out
-                  <a class="text-indigo-600" href="https://awaken.tax/?ref=zkexport" target="_blank">awaken.tax</a>!
-                  They support dozens of exchanges/blockchains and are fine-tuned for DeFi & NFT
+                  <a
+                    class="text-indigo-600"
+                    href="https://awaken.tax/?ref=zkexport"
+                    target="_blank"
+                    @click.passive="logEvent('awaken.tax clicked')"
+                    >awaken.tax</a
+                  >! They support dozens of exchanges/blockchains and are fine-tuned for DeFi & NFT
                 </p>
                 <Button
                   as="a"
@@ -92,6 +101,7 @@
                   color="indigo"
                   outline
                   class="mt-2 w-full sm:-mb-1.5"
+                  @click.passive="logEvent('awaken.tax clicked')"
                 >
                   Get free $30 bonus&nbsp;<span aria-hidden="true">&rarr;</span>
                 </Button>
@@ -108,6 +118,7 @@
 import { computed } from "vue";
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from "@headlessui/vue";
 import { CheckIcon, ExclamationIcon, StopIcon, HeartIcon } from "@heroicons/vue/outline";
+import { logEvent } from "@/utils/logger";
 import Button from "./Button.vue";
 import Spinner from "./Spinner.vue";
 

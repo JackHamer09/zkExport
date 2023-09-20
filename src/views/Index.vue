@@ -9,6 +9,7 @@
           href="https://awaken.tax/?ref=zkexport"
           target="_blank"
           class="block font-semibold text-indigo-100 sm:inline"
+          @click.passive="logEvent('awaken.tax clicked')"
         >
           <span class="absolute inset-0" aria-hidden="true" />Try awaken.tax
           <span aria-hidden="true">&rarr;</span>
