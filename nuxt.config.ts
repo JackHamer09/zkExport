@@ -30,7 +30,7 @@ export default defineNuxtConfig({
     },
   },
 
-  ssr: false,
+  ssr: true,
   devtools: { enabled: true },
   modules: [
     "@pinia/nuxt", // https://pinia.vuejs.org/ssr/nuxt.html

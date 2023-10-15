@@ -54,6 +54,7 @@ export default () => {
   };
   const download = (formatter: DownloadTransferFormatter) => {
     const fileName = `Transactions_${address.value}_${format(new Date(), "HH-mm_MM-dd-yyyy")}`;
+    const fileFormat = usePreferencesStore().downloadFormat.key;
     if (formatter === "default") {
       downloadData(
         getTransfersDownloadData(collection.value, {
@@ -61,7 +62,8 @@ export default () => {
           networkName: selectedChain.value.name,
           l1NetworkName: selectedChain.value.l1Name,
         }),
-        fileName
+        fileName,
+        fileFormat
       );
     } else if (formatter === "awaken") {
       downloadData(
@@ -70,7 +72,8 @@ export default () => {
           networkName: selectedChain.value.name,
           l1NetworkName: selectedChain.value.l1Name,
         }),
-        fileName
+        fileName,
+        "csv"
       );
     }
 
