@@ -12,7 +12,7 @@
         </a>
       </div>
       <a
-        href="https://github.com/JackHamer09/zksync-plus"
+        href="https://github.com/JackHamer09/zkExport"
         title="zkSync Plus GitHub page"
         target="_blank"
         rel="noopener"
