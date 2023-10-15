@@ -1,0 +1,6 @@
+/export/account/transactions  /
+/export/account/balances      /
+/export/account/nfts          /
+/export/account/info          /
+/export/block/transactions    /
+/export/block/info            /
