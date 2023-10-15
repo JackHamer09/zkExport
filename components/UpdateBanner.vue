@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="!versionAcknowledged"
-    class="relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 transition-opacity hover:opacity-100 sm:px-3.5 sm:opacity-40 sm:before:flex-1"
+    class="relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 transition-opacity hover:opacity-100 sm:px-3.5 sm:opacity-50 sm:before:flex-1"
   >
     <div
       class="absolute left-[max(-7rem,calc(50%-52rem))] top-1/2 -z-10 -translate-y-1/2 transform-gpu blur-2xl"
