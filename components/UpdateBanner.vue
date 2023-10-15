@@ -61,7 +61,7 @@
     </div>
     <p class="text-sm leading-6 text-gray-900">
       zkExport received a global update. You can still
-      <a href="https://zkexport.netlify.app/export/account/transactions" class="whitespace-nowrap font-semibold">
+      <a href="https://zkexport-old.netlify.app/export/account/transactions" class="whitespace-nowrap font-semibold">
         go to old version&nbsp;<span aria-hidden="true">&rarr;</span>
       </a>
     </p>
