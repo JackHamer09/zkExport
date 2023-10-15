@@ -1,27 +1,10 @@
-/* eslint-env node */
-require("@rushstack/eslint-patch/modern-module-resolution");
-
 module.exports = {
   root: true,
-  extends: [
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "@vue/eslint-config-typescript/recommended",
-    "@vue/eslint-config-prettier",
-  ],
-  env: {
-    "vue/setup-compiler-macros": true,
-  },
+  extends: ["@nuxtjs/eslint-config-typescript", "@vue/eslint-config-prettier"],
   rules: {
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "vue/multi-word-component-names": "off",
+    semi: ["error", "always"], // Require semicolons
+    quotes: ["error", "double"], // Require double quotes
+    "vue/multi-word-component-names": "off", // Allow multi-word component names
+    "vue/require-default-prop": "off", // Allow props without default values
   },
-  overrides: [
-    {
-      files: ["*.config.js"],
-      env: {
-        node: true,
-      },
-    },
-  ],
 };

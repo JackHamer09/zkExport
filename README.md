@@ -1,33 +1,27 @@
-# zkExport - zkSync Lite mass exporting tool
 
-## Description
+# zkExport: **Export zkSync Era** and Lite transactions
 
-zkExport is an open-source tool that will help you mass export transactions from zkSync Lite L2 network to different popular table formats (CSV, XLS and more) with a great range of options.
+zkExport makes it easy to **export zkSync Era** and Lite transactions to different table formats like CSV or XLS. Anyone can use it to get their transaction data for checking, studying, or just keeping records.
 
----
+## 🚀 Quick Start
+![zkExport Preview](./public/preview.jpg)
 
-## Try it out by following the link
+Use zkExport directly via [zkExport.netlify.app](https://zkexport.netlify.app).
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/422a6173-7a41-41a3-ae96-d51c43779f36/deploy-status)](https://app.netlify.com/sites/zkexport/deploys)
+## 🌐 Supported Networks
 
-[zkExport.netlify.app](https://zkexport.netlify.app)
+zkExport currently supports the following networks:
 
----
+- **zkSync Era Mainnet**
+- **zkSync Era Testnet**
+- zkSync Lite Mainnet
+- zkSync Lite Goerli Testnet
 
-## Features
-- Account
-    - Export of account transactions
-    - Export of account balances (tokens)
-    - Export of account owned and minted NFTs
-    - Export of account state information
-- Block
-    - Export of block transactions
-    - Export of block information
+## 📄 Supported File Formats
 
----
+Flexible **export** options with various file formats to cater to different use-cases:
 
-## Supported file formats
-- CSV
+- **CSV**
 - XLS (XLSX)
 - XML
 - ODS
