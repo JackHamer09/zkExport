@@ -4,38 +4,38 @@
     xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
     xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
     <url>
-        <loc>https://zkexport.netlify.app/</loc>
-        <lastmod>2022-06-04T00:32:44+00:00</lastmod>
+        <loc>https://zkexport-old.netlify.app/</loc>
+        <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport.netlify.app/export/account/transactions</loc>
-        <lastmod>2022-06-04T00:32:44+00:00</lastmod>
+        <loc>https://zkexport-old.netlify.app/export/account/transactions</loc>
+        <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport.netlify.app/export/account/balances</loc>
-        <lastmod>2022-06-04T00:32:44+00:00</lastmod>
+        <loc>https://zkexport-old.netlify.app/export/account/balances</loc>
+        <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport.netlify.app/export/account/nfts</loc>
-        <lastmod>2022-06-04T00:32:44+00:00</lastmod>
+        <loc>https://zkexport-old.netlify.app/export/account/nfts</loc>
+        <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport.netlify.app/export/account/info</loc>
-        <lastmod>2022-06-04T00:32:44+00:00</lastmod>
+        <loc>https://zkexport-old.netlify.app/export/account/info</loc>
+        <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport.netlify.app/export/block/transactions</loc>
-        <lastmod>2022-06-04T00:32:44+00:00</lastmod>
+        <loc>https://zkexport-old.netlify.app/export/block/transactions</loc>
+        <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport.netlify.app/export/block/info</loc>
-        <lastmod>2022-06-04T00:32:44+00:00</lastmod>
+        <loc>https://zkexport-old.netlify.app/export/block/info</loc>
+        <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
 </urlset>
