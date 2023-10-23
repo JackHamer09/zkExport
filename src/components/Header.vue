@@ -1,4 +1,5 @@
 <template>
+  <NewVersionBanner />
   <Popover class="header gradient-bg relative">
     <DonateModal v-model:value="donateModalOpened" />
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
@@ -157,6 +158,7 @@ import { MenuIcon, XIcon, HeartIcon } from "@heroicons/vue/outline";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 import { accountRoutes, blockRoutes } from "@/router";
 import { logEvent } from "@/utils/logger";
+import NewVersionBanner from "@/components/NewVersionBanner.vue";
 import NetworkSwitch from "@/components/NetworkSwitch.vue";
 import DonateModal from "@/components/DonateModal.vue";
 import Button from "@/components/common/Button.vue";
