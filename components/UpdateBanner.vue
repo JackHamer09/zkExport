@@ -60,9 +60,9 @@
       />
     </div>
     <p class="text-sm leading-6 text-gray-900">
-      zkExport received a global update. You can still
-      <a href="https://zkexport-old.netlify.app/export/account/transactions" class="whitespace-nowrap font-semibold">
-        go to old version&nbsp;<span aria-hidden="true">&rarr;</span>
+      zkExport received a global update. You can still access the
+      <a href="https://zkexport-lite.netlify.app/export/account/transactions" class="whitespace-nowrap font-semibold">
+        old version&nbsp;<span aria-hidden="true">&rarr;</span>
       </a>
     </p>
     <div class="flex flex-1 justify-end">

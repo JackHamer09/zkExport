@@ -72,12 +72,12 @@ const liteChains = [
   {
     key: "mainnet",
     name: "zkSync Lite Mainnet",
-    link: "https://zkexport-old.netlify.app/export/account/transactions?network=mainnet",
+    link: "https://zkexport-lite.netlify.app/export/account/transactions?network=mainnet",
   },
   {
     key: "goerli",
     name: "zkSync Lite Goerli",
-    link: "https://zkexport-old.netlify.app/export/account/transactions?network=goerli",
+    link: "https://zkexport-lite.netlify.app/export/account/transactions?network=goerli",
   },
 ];
 
