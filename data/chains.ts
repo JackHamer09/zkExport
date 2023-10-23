@@ -18,7 +18,7 @@ const chains: Chain[] = [
   },
   {
     id: 280,
-    key: "testnet",
+    key: "goerli",
     name: "zkSync Era Testnet",
     l1Name: "Ethereum Goerli Testnet",
     apiUrl: "https://block-explorer-api.testnets.zksync.dev",

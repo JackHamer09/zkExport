@@ -21,6 +21,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useRouteQuery } from "@vueuse/router";
 import useDownloadTransfers from "@/composables/download/useDownloadTransfers";
 
 useHead({
@@ -32,7 +33,7 @@ useHead({
   ],
 });
 
-const accountAddress = ref("");
+const accountAddress = useRouteQuery("address");
 const {
   fetchedTotal,
   total,

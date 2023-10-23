@@ -8,6 +8,16 @@ export const useNetworkStore = defineStore("network", () => {
     return chains.find((e) => e.key === selectedStorageChain.value) ?? defaultChain;
   });
 
+  const identifyNetworkByQueryParam = () => {
+    const windowLocation = process.client ? window.location.search : "";
+    const networkFromQueryParam = new URLSearchParams(windowLocation).get("network");
+    if (networkFromQueryParam && chains.some((e) => e.key === networkFromQueryParam)) {
+      selectedStorageChain.value = networkFromQueryParam;
+    }
+  };
+
+  identifyNetworkByQueryParam();
+
   const changeChain = (chain: string) => {
     selectedStorageChain.value = chain;
   };
