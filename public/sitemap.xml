@@ -4,37 +4,37 @@
     xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
     xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
     <url>
-        <loc>https://zkexport-old.netlify.app/</loc>
+        <loc>https://zkexport-lite.netlify.app/</loc>
         <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport-old.netlify.app/export/account/transactions</loc>
+        <loc>https://zkexport-lite.netlify.app/export/account/transactions</loc>
         <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport-old.netlify.app/export/account/balances</loc>
+        <loc>https://zkexport-lite.netlify.app/export/account/balances</loc>
         <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport-old.netlify.app/export/account/nfts</loc>
+        <loc>https://zkexport-lite.netlify.app/export/account/nfts</loc>
         <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport-old.netlify.app/export/account/info</loc>
+        <loc>https://zkexport-lite.netlify.app/export/account/info</loc>
         <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport-old.netlify.app/export/block/transactions</loc>
+        <loc>https://zkexport-lite.netlify.app/export/block/transactions</loc>
         <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>
     <url>
-        <loc>https://zkexport-old.netlify.app/export/block/info</loc>
+        <loc>https://zkexport-lite.netlify.app/export/block/info</loc>
         <lastmod>2023-10-15T21:37:28+00:00</lastmod>
         <changefreq>Monthly</changefreq>
     </url>

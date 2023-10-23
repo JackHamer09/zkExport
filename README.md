@@ -8,7 +8,7 @@ zkExport is an open-source tool that will help you mass export transactions from
 
 ## Try it out by following the link
 
-[zkExport-old.netlify.app](https://zkexport-old.netlify.app)
+[zkExport-lite.netlify.app](https://zkexport-lite.netlify.app)
 
 ---
 
