@@ -3,7 +3,8 @@ import useFetchTransfers from "./useFetchTransfers";
 import { getTransfersAwakenDownloadData, getTransfersDownloadData } from "@/utils/download/formatters/transfers";
 import { Status } from "@/components/download/Modal.vue";
 
-const FETCH_LIMIT_STEP = 5000;
+const FETCH_LIMIT_STEP = 10_000;
+const FETCH_TIMEOUT_DELAY = 200;
 
 export type DownloadTransferFormatter = "default" | "awaken";
 
@@ -13,7 +14,6 @@ export default () => {
 
   const status = ref<Status>("not-started");
   const limit = ref(FETCH_LIMIT_STEP);
-  const timeoutTime = 500;
   const stopped = ref(false);
 
   const fetchToLimit = async () => {
@@ -29,7 +29,7 @@ export default () => {
     status.value = "searching";
     if (collection.value.length) {
       await new Promise((resolve) => {
-        setTimeout(resolve, timeoutTime);
+        setTimeout(resolve, FETCH_TIMEOUT_DELAY);
       });
     }
     await fetchMore();

@@ -15,12 +15,12 @@
           <p class="px-3 text-sm text-gray-500">
             <template v-if="modalStatus === 'searching'">
               <b>{{ fetchedTotal }}</b
-              >{{ total ? `/${total}` : "" }} transfers already saved from
+              >{{ totalFormatted }} transfers already saved from
               <span class="network-name">{{ selectedChain.name }}</span>
             </template>
             <template v-else-if="modalStatus === 'finished' || modalStatus === 'stopped'">
               <b>{{ fetchedTotal }}</b
-              >{{ total ? `/${total}` : "" }} transfers were saved from
+              >{{ totalFormatted }} transfers were saved from
               <span class="network-name">{{ selectedChain.name }}</span>
             </template>
             <template v-else-if="modalStatus === 'nothing-found'">
@@ -29,7 +29,7 @@
             </template>
             <template v-else-if="modalStatus === 'error'">
               <b>{{ fetchedTotal }}</b
-              >{{ total ? `/${total}` : "" }} transfers were saved from
+              >{{ totalFormatted }} transfers were saved from
               <span class="network-name">{{ selectedChain.name }}</span> but stopped with an error:
               <br />
               <span class="text-red-600">{{ error?.message || error }}</span>
@@ -122,6 +122,7 @@ import {
 import { ArrowUpRightIcon } from "@heroicons/vue/20/solid";
 import Spinner from "@/components/common/Spinner.vue";
 import { DownloadTransferFormatter } from "@/composables/download/useDownloadTransfers";
+import { API_TRANSFERS_LIMIT } from "@/composables/download/useFetchTransfers";
 
 export type Status = "not-started" | "stopped" | "searching" | "finished";
 
@@ -234,6 +235,15 @@ const icon = computed(() => {
         bgClass: "bg-neutral-100",
       };
   }
+});
+const totalFormatted = computed(() => {
+  if (!props.total) {
+    return "";
+  }
+  if (props.total % API_TRANSFERS_LIMIT === 0) {
+    return `/${props.total}+`;
+  }
+  return `/${props.total}`;
 });
 const limitWasHit = computed(() => modalStatus.value === "stopped" && props.fetchedTotal >= props.limit);
 </script>
