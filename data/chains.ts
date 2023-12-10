@@ -12,14 +12,21 @@ const chains: Chain[] = [
   {
     id: 324,
     key: "mainnet",
-    name: "zkSync Era Mainnet",
+    name: "zkSync Mainnet",
     l1Name: "Ethereum Mainnet",
     apiUrl: "https://block-explorer-api.mainnet.zksync.io",
   },
   {
+    id: 300,
+    key: "sepolia",
+    name: "zkSync Sepolia Testnet",
+    l1Name: "Ethereum Sepolia Testnet",
+    apiUrl: "https://block-explorer-api.sepolia.zksync.dev",
+  },
+  {
     id: 280,
     key: "goerli",
-    name: "zkSync Era Testnet",
+    name: "zkSync Goerli Testnet",
     l1Name: "Ethereum Goerli Testnet",
     apiUrl: "https://block-explorer-api.testnets.zksync.dev",
   },
