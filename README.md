@@ -1,3 +1,6 @@
+> **Note**: This repository has been archived and is no longer maintained.
+
+---
 
 # zkExport: **Export zkSync Era** and Lite transactions
 
